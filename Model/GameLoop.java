@@ -15,8 +15,8 @@ public class GameLoop extends Thread {
 
     public GameLoop(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
-        player1 = new Player(10, 20, 50, 240);
-        player2 = new Player(10,20, gameFrame.getWidth() - 60, 240);
+        player1 = new Player(10, 50, 50, 240);
+        player2 = new Player(10,50, gameFrame.getWidth() - 60, 240);
         AreaController.player1 = player1;
         AreaController.player2 = player2;
         ball = new Ball(gameFrame.getWidth() / 2, gameFrame.getHeight() / 2);

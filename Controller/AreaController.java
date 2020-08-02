@@ -7,6 +7,7 @@ public class AreaController {
     public static int areaWidth;
     public static int areaHeight;
     public static Player player1, player2;
+    public static int power;
     public static final int UP_BOUND = 30;
     public static final int DOWN_BOUND = 5;
 
@@ -30,10 +31,14 @@ public class AreaController {
                 (player1.locY < userY && player1.locY + player1.HEIGHT > userY || player1.locY < userY + height && player1.locY + player1.HEIGHT > userY + height);
         boolean second = (player2.locX < userX && player2.locX + player2.WIDTH > userX || player2.locX < userX + width && player2.locX + player2.WIDTH > userX + width) &&
                 (player2.locY < userY && player2.locY + player2.HEIGHT > userY || player2.locY < userY + height && player2.locY + player1.HEIGHT > userY + height);
-        if (first)
+        if (first) {
+            power = player1.power;
             return 1;
-        if (second)
+        }
+        else if (second) {
+            power = player2.power;
             return 2;
+        }
         else
             return 0;
     }

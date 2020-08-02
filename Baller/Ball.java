@@ -20,10 +20,11 @@ public class Ball {
         if (locY <= AreaController.UP_BOUND || locY >= AreaController.areaHeight - AreaController.DOWN_BOUND)
             currentDirection = 360 - currentDirection;
         int result = AreaController.hitThePlayer(locX, locY, diam, diam);
-        if (result == 1)
-            currentDirection = 0;
-        if (result == 2)
-            currentDirection = 180;
+        if (result != 0) {
+            currentDirection = 180 - currentDirection;
+            int bound = AreaController.power;
+            currentDirection += bound;
+        }
         result = AreaController.gotScore(locX, diam);
         if (result != 0)
             over = true;
