@@ -8,16 +8,16 @@ public class Ball {
     private VectorFactory vectorFactory;
     public boolean over = false;
 
-    public Ball(int locX, int locY) {
+    public Ball(int locX, int locY, int currentDirection) {
         this.locX = locX;
         this.locY = locY;
         diam = 4;
-        this.currentDirection = 0;
+        this.currentDirection = currentDirection;
         vectorFactory = new VectorFactory(5);
     }
 
     public void update() {
-        if (locY <= AreaController.UP_BOUND || locY >= AreaController.areaHeight - AreaController.DOWN_BOUND)
+        if (locY <= AreaController.UP_BOUND || locY >= AreaController.areaHeight - AreaController.DOWN_BOUND - 10)
             currentDirection = 360 - currentDirection;
         int result = AreaController.hitThePlayer(locX, locY, diam, diam);
         if (result != 0) {

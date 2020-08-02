@@ -1,6 +1,7 @@
 package atari.GUI;
 
 import atari.Baller.Ball;
+import atari.Controller.AreaController;
 import atari.Model.Player;
 
 import javax.swing.*;
@@ -44,8 +45,27 @@ public class GameFrame extends JFrame{
         g2d.setColor(Color.WHITE);
         g2d.fillRect(0, 0, 25, FRAME_HEIGHT);
         g2d.fillRect(FRAME_WIDTH - 25, 0, 25, FRAME_HEIGHT);
+        g2d.setFont(new Font("Tahoma",26,50));
+        g2d.drawString(String.valueOf(player1.score), 450, 70);
+        g2d.drawString(String.valueOf(player2.score), 510, 70);
+        for (int i = 0; i < 10; i++)
+            g2d.fillRect(490, i * 50, 10, 20);
         g2d.fillRect(player1.locX, player1.locY, player1.WIDTH, player1.HEIGHT);
         g2d.fillRect(player2.locX, player2.locY, player2.WIDTH, player2.HEIGHT);
         g2d.fillOval(ball.locX, ball.locY, ball.diam, ball.diam);
+        if (ball.over) {
+            g2d.setFont(new Font("Arial", 1, 50));
+            g2d.setColor(Color.YELLOW);
+            String show;
+            if (AreaController.winner == 1)
+                show = "Player 1 Scored";
+            else
+                show = "Player 2 Scored";
+            g2d.drawString(show, 300, 250);
+        } else if (player1.gameOver && player2.gameOver) {
+            g2d.setFont(new Font("Arial", 1, 100));
+            g2d.setColor(Color.RED);
+            g2d.drawString("Game Over", 240, 250);
+        }
     }
 }

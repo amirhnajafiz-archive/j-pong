@@ -7,7 +7,7 @@ public class AreaController {
     public static int areaWidth;
     public static int areaHeight;
     public static Player player1, player2;
-    public static int power;
+    public static int power, winner;
     public static final int UP_BOUND = 30;
     public static final int DOWN_BOUND = 5;
 
@@ -18,10 +18,14 @@ public class AreaController {
     public static int gotScore (int userX, int width) {
         boolean first = userX < 40;
         boolean second = userX + width > areaWidth - 50;
-        if (first)
+        if (first) {
+            winner = 1;
             return 1;
-        if (second)
+        }
+        else if (second) {
+            winner = 2;
             return 2;
+        }
         else
             return 0;
     }

@@ -6,6 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyHandler extends KeyAdapter {
+
     private Player player1;
     private Player player2;
 
@@ -28,6 +29,10 @@ public class KeyHandler extends KeyAdapter {
                 break;
             case KeyEvent.VK_DOWN:
                 player2.GoDown = true;
+                break;
+            case KeyEvent.VK_ESCAPE:
+                player1.gameOver = true;
+                player2.gameOver = true;
                 break;
         }
     }

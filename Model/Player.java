@@ -8,6 +8,7 @@ public class Player {
     public boolean GoUp, GoDown;
     public int locX, locY, score;
     public int power;
+    public boolean gameOver;
 
     public Player (int width, int height, int locX, int locY) {
         //
@@ -21,6 +22,8 @@ public class Player {
         //
         GoDown = false;
         GoUp = false;
+        //
+        gameOver = false;
     }
 
     public void update() {
@@ -28,7 +31,7 @@ public class Player {
             if (AreaController.areaCheck(locY - 5, HEIGHT)) {
                 locY -= 5;
                 if (power > -20)
-                    power--;
+                    power+=5;
             } else
                 power = 0;
         }
@@ -36,12 +39,11 @@ public class Player {
             if (AreaController.areaCheck(locY + 5, HEIGHT)) {
                 locY += 5;
                 if (power < 20)
-                    power++;
+                    power-=5;
             } else
                 power = 0;
         }
         if (!GoUp && !GoDown)
             power = 0;
     }
-
 }
