@@ -9,6 +9,7 @@ public class Player {
     public int locX, locY, score;
     public int power;
     public boolean gameOver;
+    public boolean gamePause;
 
     public Player (int width, int height, int locX, int locY) {
         //
@@ -24,6 +25,7 @@ public class Player {
         GoUp = false;
         //
         gameOver = false;
+        gamePause = false;
     }
 
     public void update() {

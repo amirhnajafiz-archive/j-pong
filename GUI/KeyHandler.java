@@ -34,6 +34,10 @@ public class KeyHandler extends KeyAdapter {
                 player1.gameOver = true;
                 player2.gameOver = true;
                 break;
+            case KeyEvent.VK_SPACE:
+                player1.gamePause = !player1.gamePause;
+                player2.gamePause = !player2.gamePause;
+                break;
         }
     }
 

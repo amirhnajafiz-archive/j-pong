@@ -53,6 +53,10 @@ public class GameFrame extends JFrame{
         g2d.fillRect(player1.locX, player1.locY, player1.WIDTH, player1.HEIGHT);
         g2d.fillRect(player2.locX, player2.locY, player2.WIDTH, player2.HEIGHT);
         g2d.fillOval(ball.locX, ball.locY, ball.diam, ball.diam);
+        if (player1.gamePause || player2.gamePause) {
+            g2d.setFont(new Font("Arial", 1, 50));
+            g2d.drawString("PAUSE", 410, 250);
+        }
         if (ball.over) {
             g2d.setFont(new Font("Arial", 1, 50));
             g2d.setColor(Color.YELLOW);

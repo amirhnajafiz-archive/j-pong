@@ -47,9 +47,11 @@ public class GameLoop extends Thread {
         while (!player1.gameOver && !player2.gameOver) {
             while (!ball.over && !player1.gameOver && !player2.gameOver) {
                 long start = System.currentTimeMillis();
-                ball.update();
-                player1.update();
-                player2.update();
+                if (!player1.gamePause && !player2.gamePause) {
+                    ball.update();
+                    player1.update();
+                    player2.update();
+                }
                 gameFrame.render(player1, player2, ball);
                 long delay = (1000 / FPS) - (System.currentTimeMillis() - start);
                 if (delay > 0) {
