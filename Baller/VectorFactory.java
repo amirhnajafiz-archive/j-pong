@@ -1,10 +1,8 @@
 package atari.Baller;
 
-import java.io.Serializable;
-
-public class VectorFactory implements Serializable {
-
+public class VectorFactory {
     public double x, y;
+    // Private internal fields
     private int speed, theta = 0;
     private double grand;
 

@@ -7,8 +7,7 @@ import java.awt.event.KeyEvent;
 
 public class KeyHandler extends KeyAdapter {
 
-    private Player player1;
-    private Player player2;
+    private Player player1, player2;
 
     public KeyHandler(Player player1, Player player2) {
         this.player1 = player1;

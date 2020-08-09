@@ -4,46 +4,43 @@ import atari.Model.Player;
 
 public class AreaController {
 
-    public static int areaWidth;
-    public static int areaHeight;
+    public static final int UP_BOUND = 30, DOWN_BOUND = 5;
+    public static int areaWidth, areaHeight, power, winner, angleBound = 10;
     public static Player player1, player2;
-    public static int power, winner;
-    public static final int UP_BOUND = 30;
-    public static final int DOWN_BOUND = 5;
 
-    public static boolean areaCheck (int locY, int height) {
-        return locY >= UP_BOUND && locY + height <= areaHeight - DOWN_BOUND;
-    }
+    public static boolean areaCheck (int locY, int height) { return locY >= UP_BOUND && locY + height <= areaHeight - DOWN_BOUND; }
 
     public static int gotScore (int userX, int width) {
-        boolean first = userX < 40;
-        boolean second = userX + width > areaWidth - 50;
-        if (first) {
-            winner = 1;
-            return 1;
-        }
-        else if (second) {
-            winner = 2;
-            return 2;
-        }
-        else
-            return 0;
+        winner = userX < 40 ? 1 : userX + width > areaWidth - 50 ? 2 : 0;
+        return winner;
     }
 
-    public static int hitThePlayer (int userX, int userY, int width, int height) {
-        boolean first = (player1.locX < userX && player1.locX + player1.WIDTH > userX || player1.locX < userX + width && player1.locX + player1.WIDTH > userX + width) &&
-                (player1.locY < userY && player1.locY + player1.HEIGHT > userY || player1.locY < userY + height && player1.locY + player1.HEIGHT > userY + height);
-        boolean second = (player2.locX < userX && player2.locX + player2.WIDTH > userX || player2.locX < userX + width && player2.locX + player2.WIDTH > userX + width) &&
-                (player2.locY < userY && player2.locY + player2.HEIGHT > userY || player2.locY < userY + height && player2.locY + player1.HEIGHT > userY + height);
-        if (first) {
-            power = player1.power;
+    public static int hitThePlayer (int userX, int userY) {
+        if (hitCheck(userX, userY, player1)) {
+            if (player1.locY + player1.HEIGHT / 2 > userY)
+                power = angleBound;
+            else if (player1.locY + player1.HEIGHT / 2 < userY)
+                power = -1 * angleBound;
+            else
+                power = 0;
             return 1;
         }
-        else if (second) {
-            power = player2.power;
+        else if (hitCheck(userX, userY, player2)) {
+            if (player2.locY + player2.HEIGHT / 2 > userY)
+                power = angleBound;
+            else if (player2.locY + player2.HEIGHT < userY)
+                power = -1 * angleBound;
+            else
+                power = 0;
             return 2;
         }
-        else
+        else {
+            power = 0;
             return 0;
+        }
+    }
+
+    private static boolean hitCheck(int userX, int userY, Player player) {
+        return  player.locX <= userX && player.locX + player.WIDTH >= userX && player.locY <= userY && player.locY + player.HEIGHT >= userY;
     }
 }

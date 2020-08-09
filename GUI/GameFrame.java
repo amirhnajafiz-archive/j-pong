@@ -10,8 +10,7 @@ import java.awt.image.BufferStrategy;
 
 public class GameFrame extends JFrame{
 
-    private final int FRAME_WIDTH = 1000;
-    private final int FRAME_HEIGHT = 500;
+    private final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 500;
     private BufferStrategy bufferStrategy;
 
     public GameFrame(String title) {

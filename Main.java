@@ -1,20 +1,14 @@
 package atari;
 
-import atari.Controller.AreaController;
-import atari.GUI.GameFrame;
-import atari.Model.GameLoop;
-
-import javax.swing.*;
-import java.awt.*;
+import atari.GUI.WelcomeFrame;
+import com.formdev.flatlaf.FlatLaf;
+import com.formdev.flatlaf.intellijthemes.FlatDarkPurpleIJTheme;
 
 public class Main {
-
     public static void main(String[] args) {
-        GameFrame gameFrame = new GameFrame("Pong");
-        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        AreaController.areaHeight = gameFrame.getHeight();
-        AreaController.areaWidth = gameFrame.getWidth();
-        GameLoop gameLoop = new GameLoop(gameFrame);
-        gameLoop.start();
+        FlatLaf flatLaf = new FlatDarkPurpleIJTheme();
+        FlatLaf.install(flatLaf);
+        WelcomeFrame welcomeFrame = new WelcomeFrame();
+        welcomeFrame.init();
     }
 }

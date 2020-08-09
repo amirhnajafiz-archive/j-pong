@@ -5,13 +5,18 @@ import atari.Controller.AreaController;
 public class Player {
 
     public final int WIDTH, HEIGHT;
-    public boolean GoUp, GoDown;
+    public boolean GoUp, GoDown, gameOver, gamePause, isBot;
     public int locX, locY, score;
-    public int power;
-    public boolean gameOver;
-    public boolean gamePause;
+    private final int level;
 
-    public Player (int width, int height, int locX, int locY) {
+    /**
+     * The class constructor.
+     * @param width player width
+     * @param height player height
+     * @param locX player first x
+     * @param locY player first y
+     */
+    public Player (int width, int height, int locX, int locY, int level) {
         //
         WIDTH = width;
         HEIGHT = height;
@@ -19,33 +24,45 @@ public class Player {
         this.locY = locY;
         //
         score = 0;
-        power = 0;
+        this.level = level;
         //
         GoDown = false;
         GoUp = false;
-        //
-        gameOver = false;
-        gamePause = false;
     }
 
     public void update() {
-        if (GoUp) {
-            if (AreaController.areaCheck(locY - 5, HEIGHT)) {
+        if (GoUp)
+            if (AreaController.areaCheck(locY - 5, HEIGHT))
                 locY -= 5;
-                if (power > -20)
-                    power+=5;
-            } else
-                power = 0;
-        }
-        if (GoDown) {
-            if (AreaController.areaCheck(locY + 5, HEIGHT)) {
+        if (GoDown)
+            if (AreaController.areaCheck(locY + 5, HEIGHT))
                 locY += 5;
-                if (power < 20)
-                    power-=5;
-            } else
-                power = 0;
+    }
+
+    public AI getAI(int y, int direction) {
+        return new AI(y, direction);
+    }
+
+    private class AI implements Runnable {
+        private int ballY, direction;
+
+        AI (int y, int direction) {
+            ballY = y;
+            this.direction = direction;
         }
-        if (!GoUp && !GoDown)
-            power = 0;
+
+        @Override
+        public void run() {
+            direction = direction % 360;
+            direction += direction < 0 ? 360 : 0;
+            if (direction > 90 && direction < 270)
+                return;
+            if (locY + HEIGHT / 2 < ballY)
+                if (AreaController.areaCheck(locY + level, HEIGHT))
+                    locY += level;
+            if (locY + HEIGHT / 2 > ballY)
+                if (AreaController.areaCheck(locY - level, HEIGHT))
+                    locY -= level;
+        }
     }
 }
