@@ -1,5 +1,8 @@
 package atari.Baller;
 
+/**
+ * This class is for the ball movement.
+ */
 public class VectorFactory {
     public double x, y;
     // Private internal fields
@@ -13,15 +16,6 @@ public class VectorFactory {
      * @param speed the state speed
      */
     public VectorFactory(int speed) {
-        this.speed = speed;
-    }
-
-    /**
-     * A setter method for setting the new speed.
-     *
-     * @param speed the new speed
-     */
-    public void setSpeed(int speed) {
         this.speed = speed;
     }
 
@@ -54,28 +48,22 @@ public class VectorFactory {
      *
      * @param way the way it want to go on vector
      */
-    public void solveTheorem(int way) {
+    public void solveTheorem() {
         int place = theta % 360;
         if (grand == 9000) {
             x = 0;
             if (theta == 270 || theta == -90)
-                y = way > 0 ? -1 * speed : speed;
+                y = -1 * speed;
             else
-                y = way > 0 ? speed : -1 * speed;
+                y = speed;
             return;
         }
         x = Math.pow(speed, 2) / (1 + Math.pow(grand, 2));
-        if (place > 90 && place < 270 || place < -90 && place > -270) {
-            if (way > 0)
-                x = -1 * Math.sqrt(x);
-            else
-                x = Math.sqrt(x);
-        } else {
-            if (way > 0)
-                x = Math.sqrt(x);
-            else
-                x = -1 * Math.sqrt(x);
-        }
+        if (place > 90 && place < 270 || place < -90 && place > -270)
+            x = -1 * Math.sqrt(x);
+        else
+            x = Math.sqrt(x);
+
         y = x * grand;
     }
 }

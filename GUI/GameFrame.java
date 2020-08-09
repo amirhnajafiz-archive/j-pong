@@ -8,11 +8,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
+/**
+ * This is the game frame which will render the output.
+ * We use triple buffering for showing the output.
+ */
 public class GameFrame extends JFrame{
-
     private final int FRAME_WIDTH = 1000, FRAME_HEIGHT = 500;
-    private BufferStrategy bufferStrategy;
+    private BufferStrategy bufferStrategy; // This is the buffer strategy using
 
+    /**
+     * Class constructor.
+     * @param title the game title
+     */
     public GameFrame(String title) {
         super(title);
         setResizable(false);
@@ -21,6 +28,9 @@ public class GameFrame extends JFrame{
         setFocusable(true);
     }
 
+    /**
+     * After setVisible.
+     */
     public void initBufferStrategy() {
         createBufferStrategy(3);
         bufferStrategy = getBufferStrategy();

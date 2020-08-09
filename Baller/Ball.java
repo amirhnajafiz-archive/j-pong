@@ -2,11 +2,14 @@ package atari.Baller;
 
 import atari.Controller.AreaController;
 
+/**
+ * This class holds the game ball status.
+ * Like position and the direction.
+ */
 public class Ball {
-
     public int locX, locY, diam, currentDirection;
     public boolean over = false;
-    private VectorFactory vectorFactory;
+    private VectorFactory vectorFactory; // Use this class for ball movement
 
     /**
      * The class constructor.
@@ -15,13 +18,12 @@ public class Ball {
      * @param currentDirection the first direction
      */
     public Ball(int locX, int locY, int currentDirection) {
-        //
         this.locX = locX;
         this.locY = locY;
-        //
+
         diam = 5;
         this.currentDirection = currentDirection;
-        //
+
         vectorFactory = new VectorFactory(5);
     }
 
@@ -37,7 +39,7 @@ public class Ball {
         over = AreaController.gotScore(locX, diam) != 0;
 
         vectorFactory.setTheta(currentDirection);
-        vectorFactory.solveTheorem(1);
+        vectorFactory.solveTheorem();
 
         locX += (int) vectorFactory.x;
         locY += (int) vectorFactory.y;
@@ -50,7 +52,7 @@ public class Ball {
 
     private void directionChange() {
         vectorFactory.setTheta(currentDirection);
-        vectorFactory.solveTheorem(1); // Find a spot little farther from out current position on the direction vector.
+        vectorFactory.solveTheorem(); // Find a spot little farther from out current position on the direction vector.
         if (AreaController.hitThePlayer(locX + (int) vectorFactory.x, locY + (int) vectorFactory.y) != 0) {
             currentDirection = 180 - currentDirection;
             currentDirection += AreaController.power;

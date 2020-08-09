@@ -2,8 +2,11 @@ package atari.Model;
 
 import atari.Controller.AreaController;
 
+/**
+ * This is the game player class to hold the
+ * player status in the game.
+ */
 public class Player {
-
     public final int WIDTH, HEIGHT;
     public boolean GoUp, GoDown, gameOver, gamePause, isBot;
     public int locX, locY, score;
@@ -17,15 +20,14 @@ public class Player {
      * @param locY player first y
      */
     public Player (int width, int height, int locX, int locY, int level) {
-        //
         WIDTH = width;
         HEIGHT = height;
         this.locX = locX;
         this.locY = locY;
-        //
+
         score = 0;
         this.level = level;
-        //
+
         GoDown = false;
         GoUp = false;
     }
@@ -43,6 +45,7 @@ public class Player {
         return new AI(y, direction);
     }
 
+    // The inner class for single playing mode
     private class AI implements Runnable {
         private int ballY, direction;
 

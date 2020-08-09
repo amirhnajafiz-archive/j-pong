@@ -2,9 +2,12 @@ package atari.Controller;
 
 import atari.Model.Player;
 
+/**
+ * This class controls the status between players
+ * and the ball for any overlapping.
+ */
 public class AreaController {
-
-    public static final int UP_BOUND = 30, DOWN_BOUND = 5;
+    public static final int UP_BOUND = 30, DOWN_BOUND = 5; // Frame bounds
     public static int areaWidth, areaHeight, power, winner, angleBound = 10;
     public static Player player1, player2;
 

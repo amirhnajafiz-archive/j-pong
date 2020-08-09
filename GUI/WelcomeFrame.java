@@ -8,12 +8,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * This is the open game frame.
+ */
 public class WelcomeFrame extends JFrame {
     private JLabel logo = new JLabel("Atari Pong");
     private String[] levels = {"Easy", "Intermediate", "Pro", "Legend"};
     private JButton singlePlayer, multiPlayer, exitButton;
     private JComboBox<String> gameLevel = new JComboBox<>(levels);
 
+    /**
+     * Class constructor.
+     */
     public WelcomeFrame() {
         setTitle("Pong game");
         setSize(700, 300);
@@ -74,7 +80,7 @@ public class WelcomeFrame extends JFrame {
 
     private void startTheGame(boolean isSingle) {
 
-        setVisible(false);
+        setVisible(false); // Close the welcome
 
         GameFrame gameFrame = new GameFrame("Pong");
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,6 +88,6 @@ public class WelcomeFrame extends JFrame {
         AreaController.areaWidth = gameFrame.getWidth();
 
         GameLoop gameLoop = new GameLoop(gameFrame, isSingle, gameLevel.getSelectedIndex() + 1);
-        gameLoop.start();
+        gameLoop.start(); // Starting the game
     }
 }

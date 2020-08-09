@@ -5,10 +5,17 @@ import atari.Model.Player;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * This class is for getting keyboard inputs.
+ */
 public class KeyHandler extends KeyAdapter {
-
     private Player player1, player2;
 
+    /**
+     * Class constructor.
+     * @param player1 the left player in frame
+     * @param player2 the right player in frame
+     */
     public KeyHandler(Player player1, Player player2) {
         this.player1 = player1;
         this.player2 = player2;
